@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
-
+import logging
+from pymodm import connect, MongoModel, fields
 # Define variable to contain Flask class for server
 app = Flask(__name__)
 
@@ -11,7 +12,9 @@ db = []
 def status():
     """Used to indicate that the server is running
     """
-    return "Server is on"
+    print("connecting to MongoDB...")
+    connect("mongodb+srv://alex_thomason:<password>@bme547.cajq2.mongodb.net/health_db?retryWrites=true&w=majority")
+    print("connected")
 
 
 @app.route("/new_patient", methods=["POST"])
